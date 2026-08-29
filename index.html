@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SC Corinthians Paulista — História do Timão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --preto:#0a0a0a;
+  --preto2:#141414;
+  --branco:#f5f4f0;
+  --cinza:#a3a3a3;
+  --dourado:#c9a227;
+  --borda:#2a2a2a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{
+  background:var(--preto);
+  color:var(--branco);
+  font-family:'Archivo',sans-serif;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{font-family:'Archivo Black',sans-serif;text-transform:uppercase}
+.serif{font-family:'Bebas Neue',sans-serif;letter-spacing:.05em}
+
+/* ===== fundo com textura listrada ===== */
+.bg-stripes{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    repeating-linear-gradient(90deg,transparent 0 120px,rgba(255,255,255,.02) 120px 240px),
+    radial-gradient(ellipse 80% 50% at 50% -10%,rgba(255,255,255,.07),transparent),
+    var(--preto);
+}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(10,10,10,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--borda);
+}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px}
+.logo{font-family:'Archivo Black',sans-serif;font-size:1.1rem;letter-spacing:.02em;display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--branco)}
+.logo svg{width:30px;height:30px}
+.nav-links{display:flex;gap:26px;list-style:none}
+.nav-links a{color:var(--cinza);text-decoration:none;font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--branco);transition:width .25s}
+.nav-links a:hover{color:var(--branco)}
+.nav-links a:hover::after{width:100%}
+#menuBtn{display:none;background:none;border:1px solid var(--borda);color:var(--branco);padding:8px 10px;cursor:pointer;border-radius:4px}
+#menuBtn svg{display:block}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;position:relative;padding:100px 20px 60px;
+}
+.hero-ano{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Archivo Black',sans-serif;font-size:clamp(8rem,32vw,26rem);
+  color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.08);
+  pointer-events:none;user-select:none;line-height:1;
+}
+.hero-tag{font-size:.8rem;letter-spacing:.35em;text-transform:uppercase;color:var(--cinza);margin-bottom:18px;animation:fadeUp .8s .1s both}
+.hero h1{font-size:clamp(2.6rem,8vw,6.5rem);line-height:.95;animation:fadeUp .8s .25s both}
+.hero h1 .fio{color:var(--branco)}
+.hero h1 .preto{color:var(--dourado)}
+.hero-sub{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,3.5vw,2.4rem);letter-spacing:.25em;margin-top:16px;animation:fadeUp .8s .4s both}
+.hero-sub span{border-bottom:3px solid var(--dourado);padding-bottom:2px}
+.hero p.desc{max-width:560px;color:var(--cinza);margin-top:24px;font-size:1rem;animation:fadeUp .8s .55s both}
+.btn{
+  display:inline-block;margin-top:36px;padding:14px 36px;border:2px solid var(--branco);
+  color:var(--branco);text-decoration:none;font-weight:700;text-transform:uppercase;
+  letter-spacing:.15em;font-size:.8rem;transition:.25s;animation:fadeUp .8s .7s both;
+}
+.btn:hover{background:var(--branco);color:var(--preto)}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);animation:fadeUp 1s 1s both}
+.scroll-hint svg{width:22px;height:34px;animation:bounce 1.8s infinite}
+
+/* ===== SEÇÕES ===== */
+section{max-width:1200px;margin:0 auto;padding:100px 24px}
+.sec-head{margin-bottom:56px}
+.sec-head .num{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.3em;color:var(--dourado)}
+.sec-head h2{font-size:clamp(1.8rem,4.5vw,3rem);margin-top:6px}
+.sec-head .bar{width:64px;height:4px;background:var(--dourado);margin-top:14px}
+
+/* fundação */
+.fundacao{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+.fundacao p{color:var(--cinza);margin-bottom:18px}
+.fundacao strong{color:var(--branco)}
+.carta{
+  border:1px solid var(--borda);background:var(--preto2);padding:36px;position:relative;
+}
+.carta::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:repeating-linear-gradient(90deg,var(--branco) 0 14px,var(--preto) 14px 28px)}
+.carta h3{font-size:1.1rem;color:var(--dourado);margin-bottom:16px}
+.carta ul{list-style:none}
+.carta li{padding:10px 0;border-bottom:1px dashed var(--borda);font-size:.95rem;display:flex;justify-content:space-between;gap:14px}
+.carta li b{color:var(--branco);white-space:nowrap}
+.carta li span{color:var(--cinza);text-align:right}
+
+/* ===== TIMELINE ===== */
+.timeline{position:relative;max-width:900px;margin:0 auto;padding:20px 0}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--borda);transform:translateX(-50%)}
+.tl-item{position:relative;width:50%;padding:0 44px 56px;cursor:pointer}
+.tl-item:nth-child(odd){left:0;text-align:right}
+.tl-item:nth-child(even){left:50%}
+.tl-dot{
+  position:absolute;top:6px;width:16px;height:16px;border-radius:50%;
+  background:var(--preto);border:3px solid var(--cinza);transition:.3s;z-index:2;
+}
+.tl-item:nth-child(odd) .tl-dot{right:-8px}
+.tl-item:nth-child(even) .tl-dot{left:-8px}
+.tl-item:hover .tl-dot,.tl-item.ativo .tl-dot{border-color:var(--dourado);background:var(--dourado);box-shadow:0 0 16px rgba(201,162,39,.5)}
+.tl-ano{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--dourado);line-height:1}
+.tl-item h3{font-size:1.05rem;margin:6px 0 8px}
+.tl-item p{color:var(--cinza);font-size:.9rem}
+.tl-mais{
+  max-height:0;overflow:hidden;transition:max-height .4s ease,margin .4s;
+  color:var(--branco);font-size:.9rem;
+}
+.tl-item.ativo .tl-mais{max-height:200px;margin-top:8px}
+.tl-hint{font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:#666;margin-top:8px}
+
+/* ===== ÍDOLOS ===== */
+.idolos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.idolo{
+  border:1px solid var(--borda);background:var(--preto2);padding:28px;position:relative;
+  overflow:hidden;transition:transform .3s,border-color .3s;
+}
+.idolo::after{
+  content:'';position:absolute;bottom:0;left:0;width:100%;height:4px;
+  background:repeating-linear-gradient(90deg,var(--branco) 0 10px,var(--preto) 10px 20px);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s;
+}
+.idolo:hover{transform:translateY(-6px);border-color:#444}
+.idolo:hover::after{transform:scaleX(1)}
+.idolo .inicial{
+  width:58px;height:58px;border-radius:50%;background:var(--branco);color:var(--preto);
+  font-family:'Archivo Black',sans-serif;font-size:1.5rem;display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+}
+.idolo h3{font-size:1.05rem}
+.idolo .epoca{font-family:'Bebas Neue',sans-serif;color:var(--dourado);letter-spacing:.15em;font-size:.95rem;margin:2px 0 10px}
+.idolo p{color:var(--cinza);font-size:.88rem}
+
+/* ===== TÍTULOS / CONTADORES ===== */
+.titulos-band{border-top:1px solid var(--borda);border-bottom:1px solid var(--borda);background:var(--preto2)}
+.contadores{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:32px;text-align:center}
+.contador .valor{font-family:'Archivo Black',sans-serif;font-size:clamp(2.4rem,6vw,4rem);color:var(--dourado);line-height:1}
+.contador .rotulo{font-size:.78rem;text-transform:uppercase;letter-spacing:.2em;color:var(--cinza);margin-top:8px}
+.lista-titulos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px;margin-top:70px}
+.lt-col h3{font-size:1rem;border-bottom:2px solid var(--dourado);padding-bottom:10px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:baseline}
+.lt-col h3 .qtd{font-family:'Bebas Neue',sans-serif;color:var(--dourado);font-size:1.4rem}
+.lt-col ul{list-style:none}
+.lt-col li{padding:7px 0;border-bottom:1px dashed var(--borda);color:var(--cinza);font-size:.92rem;display:flex;justify-content:space-between}
+.lt-col li b{color:var(--branco);font-weight:600}
+
+/* ===== QUIZ ===== */
+.quiz-box{max-width:640px;margin:0 auto;border:1px solid var(--borda);background:var(--preto2);padding:40px;position:relative}
+.quiz-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:repeating-linear-gradient(90deg,var(--preto) 0 14px,var(--branco) 14px 28px)}
+.quiz-progress{display:flex;justify-content:space-between;font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;color:var(--cinza);margin-bottom:20px}
+.quiz-barra{height:4px;background:var(--borda);margin-bottom:28px}
+.quiz-barra div{height:100%;background:var(--dourado);width:0;transition:width .4s}
+.quiz-pergunta{font-size:1.15rem;font-weight:700;margin-bottom:24px;min-height:60px}
+.quiz-opcoes{display:grid;gap:12px}
+.quiz-op{
+  text-align:left;padding:14px 18px;background:var(--preto);border:1px solid var(--borda);
+  color:var(--branco);font-family:'Archivo',sans-serif;font-size:.95rem;cursor:pointer;
+  transition:.2s;display:flex;align-items:center;gap:12px;
+}
+.quiz-op .letra{font-family:'Archivo Black',sans-serif;color:var(--dourado);flex-shrink:0}
+.quiz-op:hover:not(:disabled){border-color:var(--branco);transform:translateX(4px)}
+.quiz-op.correta{border-color:#3fb950;background:rgba(63,185,80,.12)}
+.quiz-op.errada{border-color:#f85149;background:rgba(248,81,73,.12)}
+.quiz-op:disabled{cursor:default;opacity:.85}
+.quiz-feedback{margin-top:18px;font-size:.9rem;min-height:24px;font-weight:600}
+.quiz-feedback.ok{color:#3fb950}
+.quiz-feedback.erro{color:#f85149}
+.btn-quiz{
+  margin-top:22px;padding:13px 32px;background:var(--branco);color:var(--preto);border:none;
+  font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;cursor:pointer;
+  font-family:'Archivo',sans-serif;transition:.2s;display:none;
+}
+.btn-quiz:hover{background:var(--dourado)}
+.btn-quiz.visivel{display:inline-block}
+.quiz-final{text-align:center;display:none}
+.quiz-final h3{font-size:1.6rem;margin-bottom:10px}
+.quiz-final .placar{font-family:'Archivo Black',sans-serif;font-size:3.4rem;color:var(--dourado);margin:14px 0}
+.quiz-final p{color:var(--cinza)}
+
+/* ===== FOOTER ===== */
+footer{border-top:1px solid var(--borda);text-align:center;padding:60px 24px 40px;color:var(--cinza);font-size:.85rem}
+footer .fala{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.2em;color:var(--branco);margin-bottom:8px}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+.revela{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
+.revela.visto{opacity:1;transform:none}
+
+/* ===== RESPONSIVO ===== */
+@media(max-width:760px){
+  #menuBtn{display:block}
+  .nav-links{
+    position:fixed;top:64px;left:0;right:0;flex-direction:column;gap:0;
+    background:var(--preto);border-bottom:1px solid var(--borda);
+    max-height:0;overflow:hidden;transition:max-height .35s;
+  }
+  .nav-links.aberto{max-height:340px}
+  .nav-links li{border-top:1px solid var(--borda)}
+  .nav-links a{display:block;padding:16px 24px}
+  .fundacao{grid-template-columns:1fr}
+  .timeline::before{left:8px}
+  .tl-item{width:100%;left:0!important;text-align:left!important;padding:0 0 48px 36px}
+  .tl-item .tl-dot{left:0!important;right:auto!important}
+  section{padding:70px 20px}
+  .quiz-box{padding:28px 20px}
+}
+</style>
+</head>
+<body>
+<div class="bg-stripes"></div>
+<div class="grain"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#inicio">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="#f5f4f0" stroke-width="1.5"/><path d="M12 3v18M3.5 8.5l17 7M20.5 8.5l-17 7" stroke="#f5f4f0" stroke-width="1.5"/></svg>
+      Corinthians
+    </a>
+    <button id="menuBtn" aria-label="Abrir menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" stroke="#f5f4f0" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#fundacao">Fundação</a></li>
+      <li><a href="#linha-do-tempo">Linha do Tempo</a></li>
+      <li><a href="#idolos">Ídolos</a></li>
+      <li><a href="#titulos">Títulos</a></li>
+      <li><a href="#quiz">Quiz</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="inicio">
+  <div class="hero-ano">1910</div>
+  <div class="hero-tag">Sport Club Corinthians Paulista</div>
+  <h1><span class="fio">Sport Club<br>Corinthians</span><br><span class="preto">Paulista</span></h1>
+  <div class="hero-sub"><span>O Timão</span></div>
+  <p class="desc">Fundado em 1910 no Bom Retiro, em São Paulo, o clube do povo — o Time do Povo — construiu mais de um século de história alvinegra feita de títulos, ídolos e uma paixão que não se explica, se vive.</p>
+  <a class="btn" href="#fundacao">Conheça a história</a>
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 36" fill="none"><rect x="1" y="1" width="22" height="34" rx="11" stroke="#a3a3a3" stroke-width="1.5"/><circle cx="12" cy="10" r="3" fill="#c9a227"/></svg>
+  </div>
+</header>
+
+<!-- FUNDAÇÃO -->
+<section id="fundacao">
+  <div class="sec-head revela">
+    <div class="num">01 / Origem</div>
+    <h2>A fundação no Bom Retiro</h2>
+    <div class="bar"></div>
+  </div>
+  <div class="fundacao">
+    <div class="revela">
+      <p>Na noite de <strong>1º de setembro de 1910</strong>, um grupo de jovens operários do bairro do <strong>Bom Retiro</strong>, em São Paulo, reunidos sob uma luz de lampião na Rua dos Imigrantes, decidiu fundar um clube de futebol. Inspirados pelo English Corinthian FC, clube inglês que passava pelo Brasil, escolheram o nome <strong>Sport Club Corinthians Paulista</strong>.</p>
+      <p>Naquela época, o futebol era esporte das elites. O Corinthians nasceu ao contrário: um clube de operários, trabalhadores e imigrantes — o <strong>Time do Povo</strong>. Essa origem popular moldou para sempre a identidade alvinegra: gigante pela paixão de milhões de torcedores espalhados por todo o Brasil.</p>
+      <p>Apenas quatro anos depois da fundação, em 1914, veio o primeiro título paulista. Foi o começo de uma das histórias mais ricas e emocionantes do futebol mundial.</p>
+    </div>
+    <aside class="carta revela">
+      <h3>Ata de fundação</h3>
+      <ul>
+        <li><b>Data</b><span>1º de setembro de 1910</span></li>
+        <li><b>Local</b><span>Rua dos Imigrantes, Bom Retiro — SP</span></li>
+        <li><b>Fundadores</b><span>Joaquim Ambrósio, Antônio Pereira, Rafael Perrone, Anselmo Corrêa e Carlos Silva</span></li>
+        <li><b>Primeiro presidente</b><span>Miguel Battaglia</span></li>
+        <li><b>Nome</b><span>Homenagem ao English Corinthian FC</span></li>
+        <li><b>Apelidos</b><span>Timão, Time do Povo, Alvinegro</span></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<!-- LINHA DO TEMPO -->
+<section id="linha-do-tempo">
+  <div class="sec-head revela">
+    <div class="num">02 / Marcos</div>
+    <h2>Linha do tempo alvinegra</h2>
+    <div class="bar"></div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item revela"><span class="tl-dot"></span>
+      <div class="tl-ano">1910</div><h3>A fundação</h3>
+      <p>Jovens do Bom Retiro fundam o clube sob um lampião.</p>
+      <div class="tl-mais">O primeiro jogo foi contra o Estrela Polar, no Campo da Lenheira. Nasce o clube que se tornaria o Time do Povo.</div>
+      <div class="tl-hint">Clique para expandir</div>
+    </div>
+    <div class="tl-item revela"><span class="tl-dot"></span>
+      <div class="tl-ano">1914</div><h3>Primeiro título paulista</h3>
+      <p>Só quatro anos após a fundação, o primeiro troféu.</p>
+      <div class="tl-mais">Com Neco como destaque, o Corinthians venceu o Campeonato Paulista de 1914, provando a força do clube popular.</div>
+      <div class="tl-hint">Clique para expandir</div>
+    </div>
+    <div class="tl-item revela"><span class="tl-dot"></span>
+      <div class="tl-ano">1922</div><h3>O Centenário e a seleção</h3>
+      <p>Título paulista marcado pelo Centenário da Independência.</p>
+      <div class="tl-mais">O Time do Povo conquistou o Paulista de 1922, batendo as forças das elites do futebol paulista em pleno ano do Centenário da Independência.</div>
+      <div class="tl-hint">Clique para expandir</div>
+    </div>
+    <div class="tl-item revela"><span class="tl-dot"></span>
+      <div class="tl-ano">1951</div><h3>O time de ouro</h3>
+      <p>A "Rolo Compressor" arrasa no futebol brasileiro.</p>
+      <div class="tl-mais">Com Luisinho, Baltazar, Carbone e companhia, o Corinthians de 1951 é considerado um dos maiores times da história do clube, marcando 103 gols no Paulista.</div>
+      <div class="tl-hint">Clique para expandir</div>
+    </div>
+    <div class="tl-item revela"><span class="tl-dot"></span>
+      <div class="tl-ano">1982–84</div><h3>Democracia Corinthiana</h3>
+      <p>Sócrates, Casagrande e Wladimir: futebol e liberdade.</p>
+      <div class="tl-mais">Liderado pelo Doutor Sócrates, o clube viveu a Democracia Corinthiana: "Ganhar ou perder, mas sempre em democracia". Decisões do clube — inclusive escalações — eram votadas por todos.</div>
+      <div class="tl-hint">Clique para expandir</div>
+    </div>
+    <div class="tl-item revela"><span class="tl-dot"></span>
+      <div class="tl-ano">1990</div><h3>Primeiro título brasileiro</h3>
+      <p>O Tetra adversário cai: é campeão o Timão.</p>
+      <div class="tl-mais">Com Tupãzinho marcando o gol do título contra o São Paulo, o Corinthians conquistou seu primeiro Campeonato Brasileiro, encerrando a espera de 76 anos.</div>
+      <div class="tl-hint">Clique para expandir</div>
+    </div>
+    <div class="tl-item revela"><span class="tl-dot"></span>
+      <div class="tl-ano">2000</div><h3>Primeiro Mundial da FIFA</h3>
+      <p>Campeão mundial no Rio, na estreia do torneio da FIFA.</p>
+      <div class="tl-mais">Edilson, o Capetinha, brilhou. Nos pênaltis contra o Vasco, Edmundo perdeu a última cobrança e o Corinthians foi campeão mundial da FIFA pela primeira vez.</div>
+      <div class="tl-hint">Clique para expandir</div>
+    </div>
+    <div class="tl-item revela"><span class="tl-dot"></span>
+      <div class="tl-ano">2012</div><h3>A Libertadores e o segundo Mundial</h3>
+      <p>O ano mais glorioso da história alvinegra.</p>
+      <div class="tl-mais">Cássio, Emerson Sheik e Paulinho lideraram a conquista inédita da Libertadores, batendo o Boca Juniors. Em dezembro, o Timão venceu o Chelsea e conquistou seu segundo título mundial da FIFA, no Japão.</div>
+      <div class="tl-hint">Clique para expandir</div>
+    </div>
+    <div class="tl-item revela"><span class="tl-dot"></span>
+      <div class="tl-ano">2014</div><h3>Arena Corinthians</h3>
+      <p>Nasce a casa alvinegra, aberta ao povo em Itaquera.</p>
+      <div class="tl-mais">A Arena Corinthians foi inaugurada em maio de 2014 e recebeu a partida de abertura da Copa do Mundo. Um estádio à altura da maior torcida do Brasil.</div>
+      <div class="tl-hint">Clique para expandir</div>
+    </div>
+    <div class="tl-item revela"><span class="tl-dot"></span>
+      <div class="tl-ano">2015–2017</div><h3>A era dos títulos recentes</h3>
+      <p>Brasileiros de 2015 e 2017 consolidam a força do Timão.</p>
+      <div class="tl-mais">Com Renato Augusto e Jadson de um lado, e a base campeã de outro, o Corinthians somou mais dois Brasileirões, chegando a sete títulos nacionais.</div>
+      <div class="tl-hint">Clique para expandir</div>
+    </div>
+  </div>
+</section>
+
+<!-- ÍDOLOS -->
+<section id="idolos">
+  <div class="sec-head revela">
+    <div class="num">03 / Lendas</div>
+    <h2>Galeria de ídolos</h2>
+    <div class="bar"></div>
+  </div>
+  <div class="idolos-grid" id="idolosGrid"></div>
+</section>
+
+<!-- TÍTULOS -->
+<section id="titulos" class="titulos-band" style="max-width:none;padding-left:0;padding-right:0">
+  <div style="max-width:1200px;margin:0 auto;padding:100px 24px">
+    <div class="sec-head revela">
+      <div class="num">04 / Conquistas</div>
+      <h2>A sala de troféus</h2>
+      <div class="bar"></div>
+    </div>
+    <div class="contadores revela" id="contadores"></div>
+    <div class="lista-titulos revela">
+      <div class="lt-col">
+        <h3>Campeonato Brasileiro <span class="qtd">7</span></h3>
+        <ul><li><b>1990</b><span>Brasileirão</span></li><li><b>1998</b><span>Brasileirão</span></li><li><b>1999</b><span>Brasileirão</span></li><li><b>2005</b><span>Brasileirão</span></li><li><b>2011</b><span>Brasileirão</span></li><li><b>2015</b><span>Brasileirão</span></li><li><b>2017</b><span>Brasileirão</span></li></ul>
+      </div>
+      <div class="lt-col">
+        <h3>Conquistas internacionais <span class="qtd">4</span></h3>
+        <ul><li><b>2000</b><span>Mundial da FIFA</span></li><li><b>2012</b><span>Copa Libertadores</span></li><li><b>2012</b><span>Mundial da FIFA</span></li><li><b>1995</b><span>Recopa Sul-Americana</span></li></ul>
+      </div>
+      <div class="lt-col">
+        <h3>Campeonato Paulista <span class="qtd">30+</span></h3>
+        <ul><li><b>1914 — 1938</b><span>Os primeiros títulos</span></li><li><b>1951 — 1954</b><span>Era do Time de Ouro</span></li><li><b>1977 — 1983</b><span>Ciclo de Sócrates</span></li><li><b>1995 — 2019</b><span>Era moderna</span></li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+  <div class="sec-head revela">
+    <div class="num">05 / Desafio</div>
+    <h2>Quiz: você é do Time do Povo?</h2>
+    <div class="bar"></div>
+  </div>
+  <div class="quiz-box revela">
+    <div id="quizJogo">
+      <div class="quiz-progress"><span id="quizAtual">Pergunta 1</span><span id="quizPlacar">Acertos: 0</span></div>
+      <div class="quiz-barra"><div id="quizBarra"></div></div>
+      <div class="quiz-pergunta" id="quizPergunta"></div>
+      <div class="quiz-opcoes" id="quizOpcoes"></div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+      <button class="btn-quiz" id="btnProx">Próxima pergunta</button>
+    </div>
+    <div class="quiz-final" id="quizFinal">
+      <h3 id="quizTituloFinal"></h3>
+      <div class="placar" id="quizPlacarFinal"></div>
+      <p id="quizMsgFinal"></p>
+      <button class="btn-quiz visivel" id="btnReiniciar">Jogar novamente</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fala">"Eu sou chique bem na medida em que eu posso ser"</div>
+  <p>Feito por um torcedor, para a Fiel Torcida. Site sem fins lucrativos, em homenagem ao Sport Club Corinthians Paulista.</p>
+  <p style="margin-top:8px;opacity:.6">1910 — Gigante desde sempre.</p>
+</footer>
+
+<script>
+// ===== MENU MOBILE =====
+const menuBtn=document.getElementById('menuBtn');
+const navLinks=document.getElementById('navLinks');
+menuBtn.addEventListener('click',()=>navLinks.classList.toggle('aberto'));
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('aberto')));
+
+// ===== ANIMAÇÕES ON SCROLL =====
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visto');observer.unobserve(e.target);}});
+},{threshold:.15});
+document.querySelectorAll('.revela').forEach(el=>observer.observe(el));
+
+// ===== TIMELINE INTERATIVA =====
+document.querySelectorAll('.tl-item').forEach(item=>{
+  item.addEventListener('click',()=>item.classList.toggle('ativo'));
+});
+
+// ===== ÍDOLOS =====
+const idolos=[
+  {n:'Rivellino',ep:'1965–1974',i:'R',d:'A "Paterninha" do chute forte e do elástico. Ídolo máximo do Time de Ouro, campeão mundial pela Seleção em 1970.'},
+  {n:'Sócrates',ep:'1978–1984',i:'S',d:'O Doutor. Líder da Democracia Corinthiana, capitão da Seleção de 1982 e símbolo eterno de futebol e liberdade.'},
+  {n:'Casagrande',ep:'1981–1987',i:'C',d:'Artilheiro e alma do ciclo vitorioso dos anos 80, ao lado de Sócrates e Wladimir. Vocação: fazer gol naqueles dias.'},
+  {n:'Marcelinho Carioca',ep:'1994–1997 / 1999–2001',i:'M',d:'O pé de anjo. Maior ídolo dos anos 90, comandou os Brasileirões de 1998 e 1999 com bolas paradas geniais.'},
+  {n:'Tevez',ep:'2005–2006',i:'T',d:'O Apache. Um ano e meio no Timão, mas paixão eterna: foi peça central do Brasileirão de 2005 e virou lenda alvinegra.'},
+  {n:'Cássio',ep:'2007– / 2012–',i:'C',d:'O maior campeão da história do clube. Herói da Libertadores de 2012 com defesas memoráveis e capitão de inúmeras conquistas.'},
+  {n:'Neto',ep:'1989–1993 / 1995–1996',i:'N',d:'O Showman. Meia-atacante genial que garantiu o primeiro Brasileirão em 1990 e conquistou o coração da Fiel.'},
+  {n:'Baltazar',ep:'1945–1957',i:'B',d:'O Cabecinha de Ouro. Maior artilheiro da história do Corinthians com mais de 200 gols, ídolo da Rolo Compressor.'}
+];
+document.getElementById('idolosGrid').innerHTML=idolos.map(x=>`
+  <div class="idolo revela">
+    <div class="inicial">${x.i}</div>
+    <h3>${x.n}</h3>
+    <div class="epoca">${x.ep}</div>
+    <p>${x.d}</p>
+  </div>`).join('');
+document.querySelectorAll('#idolosGrid .revela').forEach((el,i)=>{el.style.transitionDelay=(i%4*.08)+'s';observer.observe(el);});
+
+// ===== CONTADORES ANIMADOS =====
+const dadosCont=[
+  {v:7,r:'Títulos Brasileiros'},
+  {v:2,r:'Mundiais da FIFA'},
+  {v:1,r:'Libertadores'},
+  {v:30,r:'Títulos Paulistas'},
+  {v:115,r:'Anos de história'}
+];
+document.getElementById('contadores').innerHTML=dadosCont.map(c=>`
+  <div class="contador"><div class="valor" data-alvo="${c.v}">0</div><div class="rotulo">${c.r}</div></div>`).join('');
+
+const obsCont=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    obsCont.unobserve(e.target);
+    const el=e.target,alvo=+el.dataset.alvo,dur=1600,inicio=performance.now();
+    (function passo(t){
+      const p=Math.min((t-inicio)/dur,1);
+      el.textContent=Math.floor(alvo*(1-Math.pow(1-p,3)));
+      if(p<1)requestAnimationFrame(passo);else el.textContent=alvo;
+    })(inicio);
+  });
+},{threshold:.5});
+document.querySelectorAll('.valor').forEach(el=>obsCont.observe(el));
+
+// ===== QUIZ =====
+const perguntas=[
+  {p:'Em que bairro de São Paulo o Corinthians foi fundado?',o:['Mooca','Bom Retiro','Brás','Santana'],c:1,e:'Foi no Bom Retiro, na Rua dos Imigrantes, em 1º de setembro de 1910.'},
+  {p:'Qual o apelido mais famoso do Corinthians?',o:['Verdão','Tricolor','Timão','Alviverde'],c:2,e:'Timão, o nome carinhoso que a Fiel deu ao clube alvinegro.'},
+  {p:'Em que ano o Corinthians conquistou seu primeiro título paulista?',o:['1910','1914','1922','1930'],c:1,e:'Em 1914, apenas quatro anos após a fundação.'},
+  {p:'Qual movimento social o clube viveu nos anos 1980?',o:['Democracia Corinthiana','Revolta da Vacina','Semana de 22','Diretas Já no Timão'],c:0,e:'A Democracia Corinthiana, liderada por Sócrates: ganhar ou perder, mas sempre em democracia.'},
+  {p:'Quantos títulos brasileiros o Corinthians possui (até 2017)?',o:['5','6','7','8'],c:2,e:'Sete: 1990, 1998, 1999, 2005, 2011, 2015 e 2017.'},
+  {p:'Contra qual clube o Corinthians venceu a final da Libertadores de 2012?',o:['Boca Juniors','River Plate','Universidad de Chile','Fluminense'],c:0,e:'Contra o Boca Juniors, da Argentina, no ano mais glorioso da história alvinegra.'},
+  {p:'Qual time o Corinthians venceu na final do Mundial da FIFA de 2012?',o:['Barcelona','Chelsea','Real Madrid','Corinthians da Inglaterra'],c:1,e:'O Chelsea, por 1 a 0, no Japão, com gol de Paulinho.'},
+  {p:'Quem foi o "Doutor", meia e líder da Democracia Corinthiana?',o:['Rivellino','Casagrande','Sócrates','Neto'],c:2,e:'Sócrates, formado em Medicina e um dos maiores capitães da história.'},
+  {p:'Em que ano foi inaugurada a Arena Corinthians?',o:['2010','2012','2014','2016'],c:2,e:'Em 2014, em Itaquera, sede da abertura da Copa do Mundo.'},
+  {p:'Contra quem o Corinthians venceu o Mundial da FIFA de 2000?',o:['Real Madrid','Manchester United','Vasco da Gama','Boca Juniors'],c:2,e:'O Vasco da Gama, nos pênaltis, no Maracanã — Edmundo perdeu a cobrança decisiva.'}
+];
+
+let atual=0,acertos=0,travado=false;
+const elPergunta=document.getElementById('quizPergunta'),
+      elOpcoes=document.getElementById('quizOpcoes'),
+      elFeedback=document.getElementById('quizFeedback'),
+      elAtual=document.getElementById('quizAtual'),
+      elPlacar=document.getElementById('quizPlacar'),
+      elBarra=document.getElementById('quizBarra'),
+      btnProx=document.getElementById('btnProx'),
+      quizJogo=document.getElementById('quizJogo'),
+      quizFinal=document.getElementById('quizFinal');
+
+const letras=['A','B','C','D'];
+
+function mostrarPergunta(){
+  travado=false;
+  const q=perguntas[atual];
+  elAtual.textContent='Pergunta '+(atual+1)+' de '+perguntas.length;
+  elPlacar.textContent='Acertos: '+acertos;
+  elBarra.style.width=(atual/perguntas.length*100)+'%';
+  elPergunta.textContent=q.p;
+  elFeedback.textContent='';elFeedback.className='quiz-feedback';
+  btnProx.classList.remove('visivel');
+  elOpcoes.innerHTML='';
+  q.o.forEach((txt,i)=>{
+    const b=document.createElement('button');
+    b.className='quiz-op';
+    b.innerHTML='<span class="letra">'+letras[i]+')</span> '+txt;
+    b.addEventListener('click',()=>responder(i,b));
+    elOpcoes.appendChild(b);
+  });
+}
+
+function responder(i,btn){
+  if(travado)return;travado=true;
+  const q=perguntas[atual];
+  [...elOpcoes.children].forEach(b=>b.disabled=true);
+  if(i===q.c){
+    btn.classList.add('correta');acertos++;
+    elFeedback.textContent='Resposta certa! '+q.e;
+    elFeedback.className='quiz-feedback ok';
+  }else{
+    btn.classList.add('errada');
+    elOpcoes.children[q.c].classList.add('correta');
+    elFeedback.textContent='Não foi essa... '+q.e;
+    elFeedback.className='quiz-feedback erro';
+  }
+  elPlacar.textContent='Acertos: '+acertos;
+  if(atual<perguntas.length-1){
+    btnProx.textContent='Próxima pergunta';
+  }else{
+    btnProx.textContent='Ver resultado';
+  }
+  btnProx.classList.add('visivel');
+}
+
+btnProx.addEventListener('click',()=>{
+  atual++;
+  if(atual<perguntas.length){mostrarPergunta();}else{mostrarFinal();}
+});
+
+function mostrarFinal(){
+  elBarra.style.width='100%';
+  quizJogo.style.display='none';
+  quizFinal.style.display='block';
+  document.getElementById('quizPlacarFinal').textContent=acertos+' / '+perguntas.length;
+  let titulo,msg;
+  if(acertos===10){titulo='Gigante da Consolação!';msg='Você é 100% Fiel. O Timão aprova!';}
+  else if(acertos>=7){titulo='Mandante da Arena!';msg='Você conhece muito a história alvinegra.';}
+  else if(acertos>=4){titulo='Torcedor da Geral';msg='Boa! Mas vale revisar um pouco da história do Time do Povo.';}
+  else{titulo='Ainda aprendendo';msg='Volte à linha do tempo e tente de novo. O Timão te espera!';}
+  document.getElementById('quizTituloFinal').textContent=titulo;
+  document.getElementById('quizMsgFinal').textContent=msg;
+}
+
+document.getElementById('btnReiniciar').addEventListener('click',()=>{
+  atual=0;acertos=0;
+  quizFinal.style.display='none';
+  quizJogo.style.display='block';
+  mostrarPergunta();
+});
+
+mostrarPergunta();
+</script>
+</body>
+</html>
